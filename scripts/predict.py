@@ -1,6 +1,5 @@
 # Third-party
 import torch
-from torch.amp import autocast
 
 # Local
 from cassava_model_comparison import config as cfg
