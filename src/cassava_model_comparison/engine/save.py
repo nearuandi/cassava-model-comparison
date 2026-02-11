@@ -9,6 +9,8 @@ from torch.amp import GradScaler
 from torch.optim import Optimizer
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
+from cassava_model_comparison.models import build_model
+
 
 def save_best(
     run_dir: Path,
@@ -54,9 +56,13 @@ def load_checkpoint(
 
 
 def load_best_model(
-    model: nn.Module,
-    ckpt: Dict[str, Any],
-    strict: bool = True,
+    model_name: str,
+    ckpt_path: str,
+    num_classes: int,
+    device: torch.device
 ) -> nn.Module:
-    model.load_state_dict(ckpt["model_state_dict"], strict=strict)
+    ckpt = torch.load(ckpt_path, map_location=device)
+    model = build_model(model_name, num_classes=num_classes)
+    model.load_state_dict(ckpt["model_state_dict"])
+    model.to(device)
     return model
