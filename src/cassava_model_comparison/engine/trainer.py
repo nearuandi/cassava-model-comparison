@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 # Local
 from .train import train_one_epoch
 from .eval import validate_one_epoch
-from .checkpoint import save_best, save_history
+from .save import save_best, save_history
 
 
 def run_training(
@@ -26,8 +26,8 @@ def run_training(
         device: torch.device,
         run_dir: Path,
         optimizer: Optimizer,
+        scaler: GradScaler,
         scheduler: ReduceLROnPlateau,
-        scaler: GradScaler
 ):
     run_dir.mkdir(parents=True, exist_ok=True)
 
@@ -42,9 +42,9 @@ def run_training(
         train_loss, train_acc = train_one_epoch(
             model=model,
             train_loader=train_loader,
-            optimizer=optimizer,
             loss_fn=loss_fn,
             device=device,
+            optimizer=optimizer,
             scaler=scaler
         )
         val_loss, val_acc = validate_one_epoch(
@@ -74,8 +74,8 @@ def run_training(
                 epoch=epoch + 1,
                 model=model,
                 optimizer=optimizer,
-                scheduler=scheduler,
                 scaler=scaler,
+                scheduler=scheduler,
                 best_val_acc=best_val_acc
             )
 

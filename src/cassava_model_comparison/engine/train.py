@@ -11,9 +11,9 @@ from torch.utils.data import DataLoader
 def train_one_epoch(
         model: nn.Module,
         train_loader: DataLoader,
-        optimizer: Optimizer,
         loss_fn: nn.Module,
         device: torch.device,
+        optimizer: Optimizer,
         scaler: GradScaler
 ) -> Tuple[float, float]:
 

@@ -19,7 +19,7 @@ def save_best(
     scaler: GradScaler,
     best_val_acc: float
 ) -> None:
-    ckpt = {
+    best = {
         "model_state_dict": model.state_dict(),
         "epoch": epoch,
         "optimizer_state_dict": optimizer.state_dict(),
@@ -28,7 +28,7 @@ def save_best(
         "best_val_acc": best_val_acc
     }
 
-    torch.save(ckpt, run_dir / "best.pt")
+    torch.save(best, run_dir / "best.pt")
 
 
 def save_history(
