@@ -28,7 +28,7 @@ class CassavaDataset(Dataset):
         img_bgr = cv2.imread(str(image_path))
 
         if img_bgr is None:
-            raise FileNotFoundError(f"Failed to read image: {image_path}")
+            raise FileNotFoundError(f"파일을 읽을 수 없음: {image_path}")
 
         img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 
@@ -37,7 +37,7 @@ class CassavaDataset(Dataset):
         image = self.transform(pil_img)
 
         if not isinstance(image, Tensor):
-            raise TypeError(f"Image must be type Tensor, but {type(image)}")
+            raise TypeError(f"이미지는 텐서여야함 ")
 
         return image, label
 
