@@ -18,13 +18,13 @@ from .save import save_best, save_history
 
 def run_training(
         run_name: str,
+        run_dir: Path,
         epochs: int,
         model: nn.Module,
         train_loader: DataLoader,
         val_loader: DataLoader,
         loss_fn: nn.Module,
         device: torch.device,
-        run_dir: Path,
         optimizer: Optimizer,
         scaler: GradScaler,
         scheduler: ReduceLROnPlateau,
@@ -86,4 +86,4 @@ def run_training(
         train_time=train_time,
         best_val_acc=best_val_acc,
     )
-    print(f"{run_name} 모델 훈련 완료, best_val_acc: {best_val_acc:.2f}\n")
+    print(f"{run_name} 모델 훈련 완료, train_time: {train_time},best_val_acc: {best_val_acc:.2f}\n")
