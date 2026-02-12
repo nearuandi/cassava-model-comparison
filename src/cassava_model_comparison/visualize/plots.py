@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 History = Dict[str, List[float]]
 
 
-def _get_epochs(history: History) -> List[int]:
+def get_epochs(history: History) -> List[int]:
     n = len(history.get("val_loss", []))
     return list(range(1, n + 1))
 
@@ -17,7 +17,7 @@ def plot_loss_curves(
         history: History,
         title: str = "Loss Curves"
 ) -> None:
-    epochs = _get_epochs(history)
+    epochs = get_epochs(history)
     train_loss = history["train_loss"]
     val_loss = history["val_loss"]
 
@@ -37,7 +37,7 @@ def plot_acc_curves(
         history: History,
         title: str = "Accuracy Curves (%)"
 ) -> None:
-    epochs = _get_epochs(history)
+    epochs = get_epochs(history)
     train_acc = history["train_acc"]
     val_acc = history["val_acc"]
 
@@ -57,7 +57,7 @@ def plot_best_val_acc(
         history: History,
         title: str
 ) -> None:
-    epochs = _get_epochs(history)
+    epochs = get_epochs(history)
     val_acc = history["val_acc"]
 
     best_idx = max(range(len(val_acc)), key=lambda i: val_acc[i])
@@ -83,7 +83,7 @@ def plot_multi_model_loss(
     plt.figure()
 
     for name, history in histories.items():
-        epochs = _get_epochs(history)
+        epochs = get_epochs(history)
         plt.plot(epochs, history["val_loss"], label=f"{name}_val")
 
     plt.xlabel("Epoch")
@@ -102,7 +102,7 @@ def plot_multi_model_acc(
     plt.figure()
 
     for name, history in histories.items():
-        epochs = _get_epochs(history)
+        epochs = get_epochs(history)
         plt.plot(epochs, history["val_acc"], label=f"{name}_val")
 
     plt.xlabel("Epoch")
