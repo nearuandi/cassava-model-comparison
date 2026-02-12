@@ -6,7 +6,7 @@ import torch.nn as nn
 # Local
 from cassava_model_comparison import config as cfg
 from cassava_model_comparison.datasets import build_dataloaders
-from cassava_model_comparison.engine import validate_one_epoch
+from cassava_model_comparison.engine import evaluate_one_epoch
 from cassava_model_comparison.engine import load_best_model
 
 
@@ -37,7 +37,8 @@ def main():
         for name, path in models:
             print(f"{name} 모델 테스트 시작")
             model = load_best_model(name, path, cfg.NUM_CLASSES, device)
-            test_loss, test_acc = validate_one_epoch(
+            model.eval()
+            test_loss, test_acc = evaluate_one_epoch(
                 model=model,
                 val_loader=test_loader,
                 loss_fn=loss_fn,

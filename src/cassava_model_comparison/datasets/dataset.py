@@ -12,7 +12,11 @@ from torch.utils.data import Dataset
 
 # CassavaDataset
 class CassavaDataset(Dataset):
-    def __init__(self, df: pd.DataFrame, transform: Callable[[Image.Image], Tensor]) -> None:
+    def __init__(
+            self,
+            df: pd.DataFrame,
+            transform: Callable[[Image.Image], Tensor]
+    ) -> None:
         self.df = df.reset_index(drop=True)
         self.transform = transform
 
@@ -26,18 +30,10 @@ class CassavaDataset(Dataset):
         label = int(row["label"])
 
         img_bgr = cv2.imread(str(image_path))
-
-        if img_bgr is None:
-            raise FileNotFoundError(f"파일을 읽을 수 없음: {image_path}")
-
         img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-
         pil_img = Image.fromarray(img_rgb)
 
         image = self.transform(pil_img)
-
-        if not isinstance(image, Tensor):
-            raise TypeError(f"이미지는 텐서여야함 ")
 
         return image, label
 

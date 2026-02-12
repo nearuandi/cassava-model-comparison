@@ -13,14 +13,12 @@ from cassava_model_comparison.models import build_model
 
 
 @torch.no_grad()
-def validate_one_epoch(
+def evaluate_one_epoch(
         model: nn.Module,
         val_loader: DataLoader,
         loss_fn: nn.Module,
         device: torch.device
 ) -> Tuple[float, float]:
-
-    model.eval()
 
     running_loss = 0.0
     num_correct = 0
