@@ -1,8 +1,5 @@
 # cassava-model-comparison
-Comparing CNN, ResNet50, and MobileNetV2 on Cassava Leaf Disease Classification
-
-
-cd data
+Comparing CNN, MobileNetV2, and ResNet18 on Cassava Leaf Disease Classification
 
 kaggle competitions download -c cassava-leaf-disease-classification
 

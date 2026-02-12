@@ -58,11 +58,9 @@ def load_checkpoint(
 def load_best_model(
     model_name: str,
     ckpt_path: str,
-    num_classes: int,
-    device: torch.device
+    num_classes: int
 ) -> nn.Module:
     ckpt = torch.load(ckpt_path, map_location=device)
     model = build_model(model_name, num_classes=num_classes)
     model.load_state_dict(ckpt["model_state_dict"])
-    model.to(device)
     return model

@@ -36,7 +36,7 @@ def main():
     with torch.no_grad():
         for name, path in models:
             print(f"{name} 모델 테스트 시작")
-            model = load_best_model(name, path, cfg.NUM_CLASSES, device)
+            model = load_best_model(name, path, cfg.NUM_CLASSES).to(device)
             model.eval()
             test_loss, test_acc = evaluate_one_epoch(
                 model=model,
