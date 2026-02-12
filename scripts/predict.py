@@ -15,9 +15,8 @@ def main():
     resnet18_model = load_best_model(
         model_name="resnet18",
         ckpt_path=runs_dir / "resnet18/best.pt",
-        num_classes=cfg.NUM_CLASSES,
-        device=device
-    )
+        num_classes=cfg.NUM_CLASSES
+    ).to(device)
     resnet18_model.eval()
 
     url = "http://www.iita.org/wp-content/uploads/2017/09/1024_CBSD-cassava-root-1024x683.jpg"

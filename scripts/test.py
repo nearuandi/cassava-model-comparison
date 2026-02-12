@@ -27,24 +27,24 @@ def main():
 
     loss_fn = nn.CrossEntropyLoss()
 
-    models = [
+    model_list = [
         ("simple_cnn", runs_dir / "simple_cnn/best.pt"),
         ("mobilenet_v2", runs_dir / "mobilenet_v2/best.pt"),
         ("resnet18", runs_dir / "resnet18/best.pt"),
     ]
 
-    with torch.no_grad():
-        for name, path in models:
-            print(f"{name} 모델 테스트 시작")
-            model = load_best_model(name, path, cfg.NUM_CLASSES).to(device)
-            model.eval()
-            test_loss, test_acc = evaluate_one_epoch(
-                model=model,
-                val_loader=test_loader,
-                loss_fn=loss_fn,
-                device=device
-            )
-            print(f"{name:<12} | test loss: {test_loss:.4f} | test acc: {test_acc:.2f}%\n")
+
+    for name, path in model_list:
+        print(f"{name} 모델 테스트 시작")
+        model = load_best_model(name, path, cfg.NUM_CLASSES).to(device)
+        model.eval()
+        test_loss, test_acc = evaluate_one_epoch(
+            model=model,
+            val_loader=test_loader,
+            loss_fn=loss_fn,
+            device=device
+        )
+        print(f"{name:<12} | test loss: {test_loss:.4f} | test acc: {test_acc:.2f}%\n")
 
 
 if __name__ == "__main__":

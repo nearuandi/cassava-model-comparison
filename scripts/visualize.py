@@ -8,7 +8,7 @@ from cassava_model_comparison.visualize.plots import *
 
 runs_dir = cfg.RUNS_DIR
 
-ckpt = torch.load(runs_dir / "simple_cnn/history.pt", weights_only=False)  # history 저장 파일
+ckpt = torch.load(runs_dir / "simple_cnn/history.pt")
 history = ckpt["history"]
 
 plot_loss_curves(history, title="simple_cnn Loss")
