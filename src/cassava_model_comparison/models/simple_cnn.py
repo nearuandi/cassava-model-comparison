@@ -9,28 +9,16 @@ class SimpleCNN(nn.Module):
 
         self.features = nn.Sequential(
             # Block1: (B,32,H/2,W/2)
-            nn.Conv2d(3, 32, kernel_size=3, padding=1),
-            nn.BatchNorm2d(32),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2),
+            self.conv_block(3, 32),
 
             # Block2: (B,64,H/4,W/4)
-            nn.Conv2d(32, 64, kernel_size=3, padding=1),
-            nn.BatchNorm2d(64),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2),
+            self.conv_block(32, 64),
 
             # Block3: (B,128,H/8,W/8)
-            nn.Conv2d(64, 128, kernel_size=3, padding=1),
-            nn.BatchNorm2d(128),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2),
+            self.conv_block(64, 128),
 
             # Block4: (B,256,H/16,W/16)
-            nn.Conv2d(128, 256, kernel_size=3, padding=1),
-            nn.BatchNorm2d(256),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2),
+            self.conv_block(128, 256),
 
             # GAP: (B,256,1,1)
             nn.AdaptiveAvgPool2d(1),
@@ -47,6 +35,15 @@ class SimpleCNN(nn.Module):
 
             # (B,num_classes)
             nn.Linear(512, num_classes)
+        )
+
+    @staticmethod
+    def conv_block(self, in_channels: int, out_channels: int) -> nn.Sequential:
+        return nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1, bias=False),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(2),
         )
 
     def forward(self, x: Tensor) -> Tensor:
