@@ -21,9 +21,9 @@ def main():
 
     url = "http://www.iita.org/wp-content/uploads/2017/09/1024_CBSD-cassava-root-1024x683.jpg"
 
-    _, _, test_tf = build_transforms()
+    _, _, test_transform = build_transforms()
     img = make_batch_image_from_url(
-        url=url, transform=test_tf
+        url=url, transform=test_transform
     )
     img = img.to(device)
 

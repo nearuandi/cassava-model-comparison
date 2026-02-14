@@ -53,7 +53,7 @@ def fit(
         model.eval()
         val_loss, val_acc = evaluate_one_epoch(
             model=model,
-            val_loader=val_loader,
+            data_loader=val_loader,
             loss_fn=loss_fn,
             device=device
         )
@@ -124,7 +124,7 @@ def main():
             epochs=cfg.EPOCHS,
             model=model,
             train_loader=train_loader,
-            val_loader=val_loader,
+            data_loader=val_loader,
             loss_fn=loss_fn,
             device=device,
             optimizer=optimizer,

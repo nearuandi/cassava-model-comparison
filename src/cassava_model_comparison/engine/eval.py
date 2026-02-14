@@ -15,7 +15,7 @@ from cassava_model_comparison.models import build_model
 @torch.no_grad()
 def evaluate_one_epoch(
         model: nn.Module,
-        val_loader: DataLoader,
+        data_loader: DataLoader,
         loss_fn: nn.Module,
         device: torch.device
 ) -> Tuple[float, float]:
@@ -26,7 +26,7 @@ def evaluate_one_epoch(
 
     use_amp = (device.type == "cuda")
 
-    for images, labels in val_loader:
+    for images, labels in data_loader:
         images, labels = images.to(device), labels.to(device)
 
         with autocast(device_type=device.type, enabled=use_amp):

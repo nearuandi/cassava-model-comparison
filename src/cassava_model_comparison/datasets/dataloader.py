@@ -18,11 +18,11 @@ def build_dataloaders(
 
     train_df, val_df, test_df = split_train_val_test(df, random_seed=cfg.SEED)
 
-    train_tf, val_tf, test_tf = build_transforms()
+    train_transform, val_transform, test_transform = build_transforms()
 
-    train_dataset = CassavaDataset(train_df, transform=train_tf)
-    val_dataset = CassavaDataset(val_df, transform=val_tf)
-    test_dataset = CassavaDataset(test_df, transform=test_tf)
+    train_dataset = CassavaDataset(train_df, transform=train_transform)
+    val_dataset = CassavaDataset(val_df, transform=val_transform)
+    test_dataset = CassavaDataset(test_df, transform=test_transform)
 
     pin_memory = (device.type == "cuda")
 

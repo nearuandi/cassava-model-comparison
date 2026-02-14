@@ -38,7 +38,7 @@ class SimpleCNN(nn.Module):
         )
 
     @staticmethod
-    def conv_block(self, in_channels: int, out_channels: int) -> nn.Sequential:
+    def conv_block(in_channels: int, out_channels: int) -> nn.Sequential:
         return nn.Sequential(
             nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1, bias=False),
             nn.BatchNorm2d(out_channels),

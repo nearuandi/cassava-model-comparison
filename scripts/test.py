@@ -40,7 +40,7 @@ def main():
         model.eval()
         test_loss, test_acc = evaluate_one_epoch(
             model=model,
-            val_loader=test_loader,
+            data_loader=test_loader,
             loss_fn=loss_fn,
             device=device
         )
