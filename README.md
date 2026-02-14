@@ -14,21 +14,19 @@ Expand-Archive cassava-leaf-disease-classification.zip -DestinationPath data
 ## Models  
 모델은 models/build.py 의 build_model() 함수를 통해 생성됩니다.
 
-## Training (scripts/train.py)  
+## Train (scripts/train.py)  
 훈련이 실행되며 각 runs 폴더에는 val_acc(검증 정확도)가 가장 높은 모델의 설정과 기록들이 저장됩니다.  
 ```bash
 best.pt
 history.pt
 ```
 
-## Evaluation (scripts/test.py)  
-engine/save.py 의 load_best_model() 함수를 통해 val_acc(검증 정확도) 기준으로 선택된 모델을 로드하여 test_loader를 통해 평가합니다.
+## Test (scripts/test.py)  
+val_acc(검증 정확도) 기준으로 저장된 best 모델을 로드한 뒤, test_loader를 사용해 최종 테스트 성능을 평가합니다.
 
-## Visualization (scripts/visualize.py)  
+## Visualize (scripts/visualize.py)  
 디폴트 값으로 SimpleCNN 모델의  
-Train / Validation Loss,    
-Train / Validation Accuracy,  
-Best Validation  
+Train / Validation Loss, Train / Validation Accuracy, Best Validation  
 그리고 세 모델(SimpleCNN, MobileNetV2, ResNet18)의 Validation Loss / Validation Accuracy 곡선이 출력됩니다.
 
 ## Engineering Design
@@ -36,7 +34,7 @@ Best Validation
 모델 생성은 build_model() 함수에서 관리하여 새로운 모델을 추가하더라도 학습 코드를 수정하지 않도록 설계했습니다.  
 datasets / engine / models 로 역할을 분리해 코드 가독성과 유지보수성을 고려했습니다.
 
-프로젝트구조  
+## Project Structure  
 ```text
 cassava-model-comparison
 ├── data/

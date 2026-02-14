@@ -47,10 +47,11 @@ def save_history(
 
 def load_best_model(
     model_name: str,
-    ckpt_path: str,
-    num_classes: int
+    best_path: str,
+    num_classes: int,
+    device: torch.device
 ) -> nn.Module:
-    ckpt = torch.load(ckpt_path)
+    best = torch.load(best_path, map_location=device, weights_only=True)
     model = build_model(model_name, num_classes=num_classes)
-    model.load_state_dict(ckpt["model_state_dict"])
+    model.load_state_dict(best["model_state_dict"])
     return model
