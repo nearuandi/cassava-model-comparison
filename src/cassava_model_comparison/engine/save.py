@@ -50,7 +50,7 @@ def save_history(
 
 def load_best_model(
     model_name: str,
-    ckpt_path: str,
+    ckpt_path: Path,
     num_classes: int
 ) -> nn.Module:
     ckpt = torch.load(ckpt_path)
