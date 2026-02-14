@@ -124,7 +124,7 @@ def main():
             epochs=cfg.EPOCHS,
             model=model,
             train_loader=train_loader,
-            data_loader=val_loader,
+            val_loader=val_loader,
             loss_fn=loss_fn,
             device=device,
             optimizer=optimizer,
