@@ -1,12 +1,9 @@
-# Standard library
 from typing import Tuple
 
-# Third-party
 import pandas as pd
 import torch
 from torch.utils.data import DataLoader
 
-# Local
 from cassava_model_comparison import config as cfg
 from cassava_model_comparison.datasets import CassavaDataset, build_transforms, split_train_val_test
 

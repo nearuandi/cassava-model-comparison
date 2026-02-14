@@ -1,8 +1,6 @@
-# Standard library
 from pathlib import Path
 from typing import Callable, Tuple
 
-# Third-party
 import cv2
 import pandas as pd
 from PIL import Image

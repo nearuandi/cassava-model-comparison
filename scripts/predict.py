@@ -1,7 +1,5 @@
-# Third-party
 import torch
 
-# Local
 from cassava_model_comparison import config as cfg
 from cassava_model_comparison.datasets import build_transforms
 from cassava_model_comparison.engine import load_best_model

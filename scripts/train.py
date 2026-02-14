@@ -1,8 +1,6 @@
-# Standard library
 import time
 from pathlib import Path
 
-# Third-party
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -12,7 +10,6 @@ from torch.optim import Optimizer
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.data import DataLoader
 
-# Local
 from cassava_model_comparison import config as cfg
 from cassava_model_comparison.datasets import build_dataloaders
 from cassava_model_comparison.models import build_model

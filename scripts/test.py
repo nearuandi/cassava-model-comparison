@@ -1,9 +1,7 @@
-# Third-party
 import pandas as pd
 import torch
 import torch.nn as nn
 
-# Local
 from cassava_model_comparison import config as cfg
 from cassava_model_comparison.datasets import build_dataloaders
 from cassava_model_comparison.engine import evaluate_one_epoch

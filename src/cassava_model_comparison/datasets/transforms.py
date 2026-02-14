@@ -1,11 +1,8 @@
-# Standard library
 from typing import Tuple
 
-# Third-party
 from torchvision import transforms
 from torchvision.transforms import Compose
 
-# Local
 from cassava_model_comparison import config as cfg
 
 

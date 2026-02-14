@@ -1,7 +1,5 @@
-# Standard library
 from io import BytesIO
 
-# Third-party
 import matplotlib.pyplot as plt
 import requests
 from PIL import Image

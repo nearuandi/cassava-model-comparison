@@ -1,16 +1,10 @@
-# Standard library
 from typing import Tuple
 
-# Third-party
 import numpy as np
 import torch
 import torch.nn as nn
 from torch.amp import autocast
 from torch.utils.data import DataLoader
-
-# Local
-from cassava_model_comparison.models import build_model
-
 
 @torch.no_grad()
 def evaluate_one_epoch(

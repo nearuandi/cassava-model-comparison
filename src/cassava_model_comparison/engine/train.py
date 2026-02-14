@@ -1,7 +1,5 @@
-# Standard library
 from typing import Tuple
 
-# Third-party
 import torch
 import torch.nn as nn
 from torch.amp import autocast, GradScaler

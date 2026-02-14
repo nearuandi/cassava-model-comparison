@@ -1,9 +1,7 @@
-# Third-party
 import torch
 
-# Local
 from cassava_model_comparison import config as cfg
-from cassava_model_comparison.visualize.plots import *
+from cassava_model_comparison.visualize import loss_curves, acc_curves, best_val_acc, multi_model_loss, multi_model_acc
 
 
 runs_dir = cfg.RUNS_DIR
@@ -11,10 +9,10 @@ runs_dir = cfg.RUNS_DIR
 ckpt = torch.load(runs_dir / "simple_cnn/history.pt")
 history = ckpt["history"]
 
-plot_loss_curves(history, title="simple_cnn Loss")
-plot_acc_curves(history, title="simple_cnn Acc")
+loss_curves(history, "SimpleCNN")
+acc_curves(history, "SimpleCNN")
 
-plot_best_val_acc(history, title="simple_cnn best_val_acc")
+best_val_acc(history, "SimpleCNN")
 
 histories = {
     "simple_cnn": torch.load(runs_dir / "simple_cnn/history.pt")["history"],
@@ -22,5 +20,5 @@ histories = {
     "resnet18": torch.load(runs_dir / "resnet18/history.pt")["history"],
 }
 
-plot_multi_model_loss(histories, "Loss Comparison")
-plot_multi_model_acc(histories, "Accuracy Comparison")
+multi_model_loss(histories, "Validation Loss")
+multi_model_acc(histories, "Validation Accuracy (%)")

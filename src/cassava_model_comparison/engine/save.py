@@ -1,15 +1,12 @@
-# Standard library
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Dict
 
-# Third-party
 import torch
 import torch.nn as nn
 from torch.amp import GradScaler
 from torch.optim import Optimizer
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
-# Local
 from cassava_model_comparison.models import build_model
 
 

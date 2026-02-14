@@ -1,7 +1,5 @@
-# Third-party
 import torch.nn as nn
 
-# Local
 from .simple_cnn import SimpleCNN
 from .mobilenet_v2 import build_mobilenet_v2
 from .resnet18 import build_resnet18
