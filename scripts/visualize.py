@@ -1,16 +1,19 @@
 import torch
+from pathlib import Path
 
 from cassava_model_comparison import config as cfg
 from cassava_model_comparison.visualize import loss_curves, acc_curves, best_val_acc, multi_model_loss, multi_model_acc
 
 
-runs_dir = cfg.RUNS_DIR
+runs_dir = Path(cfg.RUNS_DIR)
 
-ckpt = torch.load(runs_dir / "simple_cnn/history.pt")
+model_name = "simple_cnn"
+
+ckpt = torch.load(runs_dir / fr"{model_name}/history.pt")
 history = ckpt["history"]
 
-loss_curves(history, "SimpleCNN")
-acc_curves(history, "SimpleCNN")
+loss_curves(history, model_name)
+acc_curves(history, model_name)
 
 best_val_acc(history, "SimpleCNN")
 

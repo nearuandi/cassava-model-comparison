@@ -38,7 +38,7 @@ def fit(
     print(f"{run_name} 모델 훈련 시작")
     start_time = time.time()
     for epoch in range(epochs):
-        model.train()
+
         train_loss, train_acc = train_one_epoch(
             model=model,
             train_loader=train_loader,
@@ -47,7 +47,7 @@ def fit(
             optimizer=optimizer,
             scaler=scaler
         )
-        model.eval()
+
         val_loss, val_acc = evaluate_one_epoch(
             model=model,
             data_loader=val_loader,
@@ -59,8 +59,8 @@ def fit(
         print(
             f"\n[Epoch {epoch + 1:02d}/{epochs}] "
             f"{run_name} | "
-            f"Train: Loss {train_loss:.4f}, Acc {train_acc:6.2f}% | "
-            f"Val: Loss {val_loss:.4f}, Acc {val_acc:6.2f}%"
+            f"Train: Loss {train_loss:.4f}, Acc {train_acc:.2f}% | "
+            f"Val: Loss {val_loss:.4f}, Acc {val_acc:.2f}%"
         )
 
         history["train_loss"].append(train_loss)
@@ -87,7 +87,7 @@ def fit(
         train_time=train_time,
         best_val_acc=best_val_acc,
     )
-    print(f"{run_name} 모델 훈련 완료, train_time: {train_time:.1f}초, best_val_acc: {best_val_acc:.2f}\n")
+    print(f"{run_name} 모델 훈련 완료, train_time: {train_time / 60:.1f}분, best_val_acc: {best_val_acc:.2f}\n")
 
 
 def main():

@@ -15,6 +15,8 @@ def train_one_epoch(
         scaler: GradScaler
 ) -> Tuple[float, float]:
 
+    model.train()
+
     running_loss = 0.0
     num_correct = 0
     num_samples = 0

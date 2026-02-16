@@ -14,6 +14,8 @@ def evaluate_one_epoch(
         device: torch.device
 ) -> Tuple[float, float]:
 
+    model.eval()
+
     running_loss = 0.0
     num_correct = 0
     num_samples = 0
