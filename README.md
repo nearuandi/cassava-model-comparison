@@ -1,4 +1,4 @@
-# oxford-pet-model-comparison
+# cassava-model-comparison
 Cassava Leaf Disease Classification을 기반으로 Hydra 설정을 통해 다양한 실험(exp)을 구성하고 여러 CNN 모델(SimpleCNN, MobileNetV2, ResNet18)의 학습 파이프라인을 관리하기 위한 프로젝트입니다.  
 학습 파이프라인은 재현성과 유지보수성을 고려하여 datasets / engine / models 구조로 분리하였으며, Hydra 기반 설정 관리 시스템을 적용했습니다.
 
