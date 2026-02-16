@@ -1,0 +1,3 @@
+data_dir: data
+train_dir: data/train_images
+runs_dir: runs

@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import numpy as np
 import torch
 import torch.nn as nn
@@ -12,7 +10,7 @@ def evaluate_one_epoch(
         data_loader: DataLoader,
         loss_fn: nn.Module,
         device: torch.device
-) -> Tuple[float, float]:
+) -> tuple[float, float]:
 
     model.eval()
 
@@ -36,10 +34,10 @@ def evaluate_one_epoch(
         num_correct += preds.eq(labels).sum().item()
         num_samples += batch_size
 
-    val_loss = running_loss / max(num_samples, 1)
-    val_acc = 100.0 * num_correct / max(num_samples, 1)
+    epoch_loss = running_loss / max(num_samples, 1)
+    epoch_acc = 100.0 * num_correct / max(num_samples, 1)
 
-    return val_loss, val_acc
+    return epoch_loss, epoch_acc
 
 
 @torch.no_grad()
@@ -47,7 +45,7 @@ def collect_predictions(
         model: nn.Module,
         dataloader: DataLoader,
         device: torch.device
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray]:
 
     model.eval()
 

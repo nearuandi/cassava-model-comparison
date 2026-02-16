@@ -1,13 +1,17 @@
 import torch
 from pathlib import Path
 
-from cassava_model_comparison import config as cfg
+from omegaconf import DictConfig
+import hydra
+from hydra.core.hydra_config import HydraConfig
+
 from cassava_model_comparison.datasets import build_transforms
 from cassava_model_comparison.engine import load_best_model
-from cassava_model_comparison.io import make_batch_image_from_url
+from cassava_model_comparison.utils import make_batch_image_from_url
 
-def main():
-    runs_dir = Path(cfg.RUNS_DIR)
+@hydra.main(version_base=None, config_path="../configs", config_name="config")
+def main(cfg: DictConfig):
+    runs_dir = Path(cfg.paths.runs_dir)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"predict device: {device}")
@@ -17,7 +21,7 @@ def main():
     model = load_best_model(
         model_name=model_name,
         best_path=runs_dir / "resnet18/best.pt",
-        num_classes=cfg.NUM_CLASSES,
+        num_classes=cfg.dataset.num_classes,
         device=device
     )
     model.to(device)
@@ -25,7 +29,7 @@ def main():
 
     url = "http://www.iita.org/wp-content/uploads/2017/09/1024_CBSD-cassava-root-1024x683.jpg"
 
-    _, _, test_transform = build_transforms()
+    _, _, test_transform = build_transforms(cfg)
     img = make_batch_image_from_url(
         url=url, transform=test_transform
     )
@@ -36,7 +40,7 @@ def main():
         pred = logits.argmax(dim=1)
         pred_idx = pred.item()
 
-    print(f"pred_idx={pred_idx} | class={cfg.CLASS_NAMES[pred_idx]}")
+    print(f"pred_idx={pred_idx} | class={cfg.dataset.class_names[pred_idx]}")
 
 
 if __name__ == "__main__":

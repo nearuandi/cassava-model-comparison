@@ -52,3 +52,7 @@ class SimpleCNN(nn.Module):
         x = self.classifier(x)
 
         return x
+
+def build_simple_cnn(num_classes):
+    model = SimpleCNN(num_classes=num_classes)
+    return model

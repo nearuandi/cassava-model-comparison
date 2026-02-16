@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import torch
 import torch.nn as nn
 from torch.amp import autocast, GradScaler
@@ -13,7 +11,7 @@ def train_one_epoch(
         device: torch.device,
         optimizer: Optimizer,
         scaler: GradScaler
-) -> Tuple[float, float]:
+) -> tuple[float, float]:
 
     model.train()
 

@@ -1,0 +1,14 @@
+name: cassava
+root: data
+num_classes: 5
+
+image_size: 224
+image_mean: [0.485, 0.456, 0.406]
+image_std:  [0.229, 0.224, 0.225]
+
+class_names:
+  - Cassava Bacterial Blight (CBB)
+  - Cassava Brown Streak Disease (CBSD)
+  - Cassava Green Mottle (CGM)
+  - Cassava Mosaic Disease (CMD)
+  - Healthy
