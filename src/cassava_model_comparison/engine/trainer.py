@@ -60,21 +60,19 @@ class Trainer:
 
     def fit(
         self,
-        run_name: str,
+        exp_name: str,
         run_dir: str | Path,
         num_epochs: int,
         train_loader: DataLoader,
         val_loader: DataLoader,
     ) -> None:
-        run_dir = Path(run_dir)
-        run_dir.mkdir(parents=True, exist_ok=True)
 
         history: dict[str, list[float]] = {
             "train_loss": [], "train_acc": [],
             "val_loss": [], "val_acc": [],
         }
 
-        print(f"{run_name} 모델 훈련 시작")
+        print(f"{exp_name} 훈련 시작")
 
         best_acc = 0.0
         start = time.time()
@@ -100,7 +98,7 @@ class Trainer:
                 self.scheduler.step(val_loss)
 
             print(
-                f"[Epoch {epoch + 1:02d}/{num_epochs}] {run_name} | "
+                f"[Epoch {epoch + 1:02d}/{num_epochs}] {exp_name} | "
                 f"Train: Loss {train_loss:.4f}, Acc {train_acc:.2f}% | "
                 f"Val: Loss {val_loss:.4f}, Acc {val_acc:.2f}%"
             )
@@ -131,7 +129,7 @@ class Trainer:
             best_val_acc=best_acc,
         )
         print(
-            f"{run_name} 모델 훈련 완료, "
+            f"{exp_name} 훈련 완료, "
             f"train_time: {train_time / 60:.1f}분, "
             f"best_val_acc: {best_acc:.2f}\n"
         )

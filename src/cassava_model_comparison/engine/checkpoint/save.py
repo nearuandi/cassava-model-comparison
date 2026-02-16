@@ -17,8 +17,6 @@ def save_best(
     scaler: GradScaler,
     best_val_acc: float
 ) -> None:
-    run_dir = Path(run_dir)
-    run_dir.mkdir(parents=True, exist_ok=True)
 
     best = {
         "model_state_dict": model.state_dict(),
@@ -37,8 +35,6 @@ def save_history(
     train_time: float,
     best_val_acc: float
 ) -> None:
-    run_dir = Path(run_dir)
-    run_dir.mkdir(parents=True, exist_ok=True)
 
     history_data = {
         "history": history,

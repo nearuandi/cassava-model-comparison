@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 from omegaconf import DictConfig
 import hydra
+from omegaconf import OmegaConf
 from hydra.core.hydra_config import HydraConfig
 
 from cassava_model_comparison.datasets import build_dataloaders
@@ -17,8 +18,14 @@ def run_one_exp(
         cfg: DictConfig,
         device: torch.device
 ) -> None:
-    run_name = cfg.exp.name
-    run_dir = Path(HydraConfig.get().runtime.output_dir)
+    # run_dir = Path(HydraConfig.get().runtime.output_dir)
+    runs_dir = Path(cfg.paths.runs_dir)
+
+    exp_name = cfg.exp.name
+
+    run_dir = runs_dir / exp_name
+    run_dir.mkdir(exist_ok=True, parents=True)
+    OmegaConf.save(cfg, run_dir / "config.yaml")
 
     if device.type == "cuda":
         torch.backends.cudnn.benchmark = True
@@ -56,7 +63,7 @@ def run_one_exp(
     )
 
     trainer.fit(
-        run_name=run_name,
+        exp_name=exp_name,
         run_dir=run_dir,
         num_epochs=cfg.train.num_epochs,
         train_loader=train_loader,
