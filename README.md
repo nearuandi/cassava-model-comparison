@@ -1,4 +1,4 @@
-# cassava-model-comparison
+# oxford-pet-model-comparison
 Cassava Leaf Disease Classification을 기반으로 Hydra 설정을 통해 다양한 실험(exp)을 구성하고 여러 CNN 모델(SimpleCNN, MobileNetV2, ResNet18)의 학습 파이프라인을 관리하기 위한 프로젝트입니다.  
 학습 파이프라인은 재현성과 유지보수성을 고려하여 datasets / engine / models 구조로 분리하였으며, Hydra 기반 설정 관리 시스템을 적용했습니다.
 
@@ -16,10 +16,11 @@ Expand-Archive cassava-leaf-disease-classification.zip -DestinationPath data
 
 ## Train (scripts/train.py)  
 모델 학습을 실행합니다.  
-각 runs 폴더에는 validation accuracy 기준으로 가장 성능이 높은 모델과 학습 기록이 저장됩니다.
+각 runs 폴더에는 validation accuracy 기준으로 가장 성능이 높은 모델, 학습 기록(history.pt), 그리고 실험 재현을 위한 설정(config.yaml)이 함께 저장됩니다.
 ```bash
 best.pt
 history.pt
+config.yaml
 ```
 
 ## Test (scripts/test.py)  
