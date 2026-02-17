@@ -43,7 +43,7 @@ runs/
 여러 모델(SimpleCNN, MobileNetV2, ResNet18)의 Validation 성능 곡선 비교도 가능합니다.  
 특정 실험(exp)의 결과를 시각화하려면 Hydra CLI override를 사용합니다.
 ```bash
-python scripts/visualize.py model.name=resnet18_freeze 
+python scripts/visualize.py exp.name=resnet18_freeze 
 ```
 
 ## Hydra 기반 설정 관리
