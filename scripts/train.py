@@ -75,6 +75,7 @@ def run_one_exp(
 def main(cfg: DictConfig) -> None:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"train device: {device}")
+    print(f"RUN: {cfg.exp.name}")
     run_one_exp(cfg, device)
 
 

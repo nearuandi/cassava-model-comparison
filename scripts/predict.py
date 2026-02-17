@@ -3,7 +3,6 @@ from pathlib import Path
 
 from omegaconf import DictConfig
 import hydra
-from hydra.core.hydra_config import HydraConfig
 from hydra.utils import get_original_cwd
 
 from cassava_model_comparison.datasets import build_transforms
