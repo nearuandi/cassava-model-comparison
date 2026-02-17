@@ -144,8 +144,8 @@ cassava-model-comparison
 │     │
 │     └─ __init__.py
 │
-├─ LICENSE
 ├─ pyproject.toml
+├─ LICENSE
 ├─ README.md
 └─ .gitignore
 ```
