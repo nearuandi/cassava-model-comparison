@@ -30,9 +30,9 @@ def main(cfg: DictConfig):
 
     url = "http://www.iita.org/wp-content/uploads/2017/09/1024_CBSD-cassava-root-1024x683.jpg"
 
-    _, _, test_transform = build_transforms(cfg)
+    _, eval_transform = build_transforms(cfg)
     img = make_batch_image_from_url(
-        url=url, transform=test_transform
+        url=url, transform=eval_transform
     )
     img = img.to(device)
 

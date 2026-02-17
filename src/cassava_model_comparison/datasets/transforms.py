@@ -7,7 +7,7 @@ from omegaconf import DictConfig
 # build_transforms
 def build_transforms(
         cfg: DictConfig
-) -> tuple[Compose, Compose, Compose]:
+) -> tuple[Compose, Compose]:
     dataset = cfg.dataset
 
     train_transform = Compose([
@@ -18,16 +18,10 @@ def build_transforms(
         transforms.Normalize(dataset.image_mean, dataset.image_std),
     ])
 
-    val_transform = Compose([
+    eval_transform = Compose([
         transforms.Resize((dataset.image_size, dataset.image_size)),
         transforms.ToTensor(),
         transforms.Normalize(dataset.image_mean, dataset.image_std),
     ])
 
-    test_transform = Compose([
-        transforms.Resize((dataset.image_size, dataset.image_size)),
-        transforms.ToTensor(),
-        transforms.Normalize(dataset.image_mean, dataset.image_std),
-    ])
-
-    return train_transform, val_transform, test_transform
+    return train_transform, eval_transform

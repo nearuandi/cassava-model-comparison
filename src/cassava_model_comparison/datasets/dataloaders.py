@@ -13,11 +13,11 @@ def build_dataloaders(
 
     train_df, val_df, test_df = split_train_val_test(df, random_seed=train.seed)
 
-    train_transform, val_transform, test_transform = build_transforms(cfg)
+    train_transform, eval_transform = build_transforms(cfg)
 
     train_dataset = CassavaDataset(train_df, transform=train_transform)
-    val_dataset = CassavaDataset(val_df, transform=val_transform)
-    test_dataset = CassavaDataset(test_df, transform=test_transform)
+    val_dataset = CassavaDataset(val_df, transform=eval_transform)
+    test_dataset = CassavaDataset(test_df, transform=eval_transform)
 
 
     train_loader = DataLoader(
