@@ -6,6 +6,7 @@ import torch.nn as nn
 from omegaconf import DictConfig
 import hydra
 from omegaconf import OmegaConf
+from hydra.utils import get_original_cwd
 
 from cassava_model_comparison.datasets import build_dataloaders
 from cassava_model_comparison.models import build_model
@@ -17,12 +18,13 @@ def run_one_exp(
         cfg: DictConfig,
         device: torch.device
 ) -> None:
-    runs_dir = Path(cfg.paths.runs_dir)
+    runs_dir = Path(get_original_cwd()) / cfg.paths.runs_dir
     run_dir = runs_dir / cfg.exp.name
 
     exp_name = cfg.exp.name
 
     run_dir.mkdir(exist_ok=True, parents=True)
+
     OmegaConf.save(cfg, run_dir / "config.yaml")
 
     if device.type == "cuda":

@@ -5,6 +5,7 @@ from pathlib import Path
 
 from omegaconf import DictConfig
 import hydra
+from hydra.utils import get_original_cwd
 
 from cassava_model_comparison.datasets import build_dataloaders
 from cassava_model_comparison.engine import evaluate_one_epoch
@@ -14,7 +15,7 @@ from cassava_model_comparison.engine import load_best_model
 def main(cfg: DictConfig) -> None:
     data_dir = Path(cfg.paths.data_dir)
     train_dir = Path(cfg.paths.train_dir)
-    runs_dir = Path(cfg.paths.runs_dir)
+    runs_dir = Path(get_original_cwd()) / cfg.paths.runs_dir
 
     train_csv = data_dir/ "train.csv"
 

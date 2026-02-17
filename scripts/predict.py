@@ -4,6 +4,7 @@ from pathlib import Path
 from omegaconf import DictConfig
 import hydra
 from hydra.core.hydra_config import HydraConfig
+from hydra.utils import get_original_cwd
 
 from cassava_model_comparison.datasets import build_transforms
 from cassava_model_comparison.engine import load_best_model
@@ -11,7 +12,7 @@ from cassava_model_comparison.utils import make_batch_image_from_url
 
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(cfg: DictConfig):
-    runs_dir = Path(cfg.paths.runs_dir)
+    runs_dir = Path(get_original_cwd()) / cfg.paths.runs_dir
     run_dir = runs_dir / cfg.exp.name
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

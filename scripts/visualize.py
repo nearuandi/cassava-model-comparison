@@ -3,6 +3,7 @@ from pathlib import Path
 
 from omegaconf import DictConfig
 import hydra
+from hydra.utils import get_original_cwd
 
 from cassava_model_comparison.visualize import loss_curves, acc_curves, best_val_acc, multi_model_loss, multi_model_acc
 
@@ -13,11 +14,12 @@ def main(cfg: DictConfig) -> None:
     # runs_dir = PROJECT_ROOT / "runs"
 
     # 프로젝트 루트에서 실행할때 주석 해제
-    runs_dir = Path(cfg.paths.runs_dir)
+    runs_dir = Path(get_original_cwd()) / cfg.paths.runs_dir
+    run_dir = runs_dir / cfg.exp.name
 
     exp_name = cfg.exp.name
 
-    ckpt = torch.load(runs_dir / f"{exp_name}/history.pt")
+    ckpt = torch.load(run_dir / "history.pt")
     history = ckpt["history"]
 
     loss_curves(history, exp_name)
