@@ -15,13 +15,13 @@ def main(cfg: DictConfig) -> None:
     # 프로젝트 루트에서 실행할때 주석 해제
     runs_dir = Path(cfg.paths.runs_dir)
 
-    model_name = cfg.model.name
+    exp_name = cfg.exp.name
 
-    ckpt = torch.load(runs_dir / f"{model_name}/history.pt")
+    ckpt = torch.load(runs_dir / f"{exp_name}/history.pt")
     history = ckpt["history"]
 
-    loss_curves(history, model_name)
-    acc_curves(history, model_name)
+    loss_curves(history, exp_name)
+    acc_curves(history, exp_name)
 
     best_val_acc(history, "SimpleCNN")
 

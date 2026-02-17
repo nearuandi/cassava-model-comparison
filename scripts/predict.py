@@ -16,10 +16,10 @@ def main(cfg: DictConfig):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"predict device: {device}")
 
-    model_name = "resnet18"
+    exp_name = cfg.exp.name
 
     model = load_best_model(
-        model_name=model_name,
+        exp_name=exp_name,
         best_path=runs_dir / "resnet18/best.pt",
         num_classes=cfg.dataset.num_classes,
         device=device

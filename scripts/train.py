@@ -38,7 +38,7 @@ def run_one_exp(
     train_loader, val_loader, _ = build_dataloaders(df=df, cfg=cfg)
 
     model = build_model(
-        model_name=cfg.model.name,
+        model_name=exp_name,
         num_classes=cfg.dataset.num_classes,
         pretrained=cfg.model.pretrained,
         freeze_backbone=cfg.model.freeze_backbone
