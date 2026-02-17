@@ -16,11 +16,19 @@ Expand-Archive cassava-leaf-disease-classification.zip -DestinationPath data
 
 ## Train (scripts/train.py)  
 모델 학습을 실행합니다.  
-각 runs 폴더에는 validation accuracy 기준으로 가장 성능이 높은 모델, 학습 기록(history.pt), 그리고 실험 재현을 위한 설정(config.yaml)이 함께 저장됩니다.
+Hydra CLI override를 통해 다양한 모델 및 실험 설정으로 학습을 수행할 수 있습니다.
 ```bash
-best.pt
-history.pt
-config.yaml
+python scripts/train.py -m model=resnet18,mobilenet_v2,simple_cnn
+```
+
+## Output
+각 실험 결과는 runs/ 폴더 아래에 저장되며, validation accuracy 기준으로 가장 성능이 높은 모델과 학습 기록, 그리고 실험 재현을 위한 설정이 함께 보관됩니다.
+```text
+runs/
+ └── <exp_name>/
+      ├── best.pt
+      ├── history.pt
+      └── config.yaml
 ```
 
 ## Test (scripts/test.py)  
@@ -32,18 +40,19 @@ config.yaml
 - Train / Validation Accuracy
 - Best Validation Accuracy
 
-여러 모델(SimpleCNN, MobileNetV2, ResNet18)의 Validation 성능 곡선 비교도 가능합니다.
+여러 모델(SimpleCNN, MobileNetV2, ResNet18)의 Validation 성능 곡선 비교도 가능합니다.  
+특정 실험(exp)의 결과를 시각화하려면 Hydra CLI override를 사용합니다.
+```bash
+python scripts/visualize.py model.name=resnet18_freeze 
+```
 
 ## Hydra 기반 설정 관리
 실험 설정은 Hydra를 사용하여 YAML 파일로 분리 관리합니다.
 
 - dataset / model / train / exp 설정을 개별 파일로 구성
-- CLI override로 다양한 실험 실행 가능
-- 코드 수정 없이 실험 조건 변경 가능
-```bash
-python scripts/train.py -m model=resnet18,mobilenet_v2,simple_cnn
-```
-runs 폴더에는 각 실험별 결과가 저장됩니다.
+- CLI override를 통해 다양한 실험 설정을 유연하게 변경 가능
+- 코드 수정 없이 YAML 및 CLI만으로 실험 조건 제어
+- 실행 시 사용된 설정(config.yaml)은 runs 폴더에 자동 저장되어 실험 재현성을 보장합니다.
 
 ## Engineering Design
 여러 모델을 동일한 조건에서 비교하기 위해 공통 학습 루프를 중심으로 구조를 설계했습니다.  

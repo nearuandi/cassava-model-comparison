@@ -15,7 +15,7 @@ def main(cfg: DictConfig) -> None:
     # 프로젝트 루트에서 실행할때 주석 해제
     runs_dir = Path(cfg.paths.runs_dir)
 
-    model_name = "simple_cnn"
+    model_name = cfg.model.name
 
     ckpt = torch.load(runs_dir / f"{model_name}/history.pt")
     history = ckpt["history"]
