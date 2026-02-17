@@ -41,7 +41,7 @@ config.yaml
 - CLI override로 다양한 실험 실행 가능
 - 코드 수정 없이 실험 조건 변경 가능
 ```bash
-python scripts/train.py model=resnet18 exp=freeze
+python scripts/train.py -m model=resnet18,mobilenet_v2,simple_cnn
 ```
 runs 폴더에는 각 실험별 결과가 저장됩니다.
 

@@ -6,7 +6,6 @@ import torch.nn as nn
 from omegaconf import DictConfig
 import hydra
 from omegaconf import OmegaConf
-from hydra.core.hydra_config import HydraConfig
 
 from cassava_model_comparison.datasets import build_dataloaders
 from cassava_model_comparison.models import build_model
@@ -18,7 +17,6 @@ def run_one_exp(
         cfg: DictConfig,
         device: torch.device
 ) -> None:
-    # run_dir = Path(HydraConfig.get().runtime.output_dir)
     runs_dir = Path(cfg.paths.runs_dir)
 
     exp_name = cfg.exp.name
