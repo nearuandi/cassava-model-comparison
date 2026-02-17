@@ -30,24 +30,25 @@ def main(cfg: DictConfig) -> None:
     loss_fn = nn.CrossEntropyLoss()
 
     model_list = [
-        ("simple_cnn", runs_dir / "simple_cnn/best.pt"),
-        ("mobilenet_v2", runs_dir / "mobilenet_v2/best.pt"),
-        ("resnet18", runs_dir / "resnet18/best.pt"),
+        ("simple_cnn", "simple_cnn", runs_dir / "simple_cnn/best.pt"),
+        ("mobilenet_v2", "mobilenet_v2", runs_dir / "mobilenet_v2/best.pt"),
+        ("resnet18", "resnet18", runs_dir / "resnet18/best.pt"),
+        ("resnet18_freeze", "resnet18", runs_dir / "resnet18_freeze/best.pt"),
     ]
 
-
-    for name, path in model_list:
-        print(f"{name} 모델 테스트 시작")
-        model = load_best_model(name, path, cfg.dataset.num_classes, device=device)
+    for exp_name, model_name, path in model_list:
+        print(f"{exp_name} 테스트 시작")
+        model = load_best_model(model_name, path, cfg.dataset.num_classes, device=device)
         model.to(device)
         model.eval()
+
         test_loss, test_acc = evaluate_one_epoch(
             model=model,
             data_loader=test_loader,
             loss_fn=loss_fn,
-            device=device
+            device=device,
         )
-        print(f"{name:<12} | test loss: {test_loss:.4f} | test acc: {test_acc:.2f}%\n")
+        print(f"{exp_name:<16} | test loss: {test_loss:.4f} | test acc: {test_acc:.2f}%\n")
 
 
 if __name__ == "__main__":
