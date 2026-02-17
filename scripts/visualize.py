@@ -15,17 +15,16 @@ def main(cfg: DictConfig) -> None:
 
     # 프로젝트 루트에서 실행할때 주석 해제
     runs_dir = Path(get_original_cwd()) / cfg.paths.runs_dir
-    run_dir = runs_dir / cfg.exp.name
 
     exp_name = cfg.exp.name
 
-    ckpt = torch.load(run_dir / "history.pt")
+    ckpt = torch.load(runs_dir/ exp_name / "history.pt")
     history = ckpt["history"]
 
     loss_curves(history, exp_name)
     acc_curves(history, exp_name)
 
-    best_val_acc(history, "SimpleCNN")
+    best_val_acc(history, exp_name)
 
     histories = {
         "simple_cnn": torch.load(runs_dir / "simple_cnn/history.pt")["history"],

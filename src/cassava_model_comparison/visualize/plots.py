@@ -12,7 +12,7 @@ def get_epochs(history: History) -> List[int]:
 
 def loss_curves(
         history: History,
-        model_name: str
+        exp_name: str
 ) -> None:
     epochs = get_epochs(history)
     train_loss = history["train_loss"]
@@ -23,7 +23,7 @@ def loss_curves(
     plt.plot(epochs, val_loss, label="val_loss")
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
-    plt.title(f"{model_name} Train / Validation Loss")
+    plt.title(f"{exp_name} Train / Validation Loss")
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
@@ -32,7 +32,7 @@ def loss_curves(
 
 def acc_curves(
         history: History,
-        model_name: str
+        exp_name: str
 ) -> None:
     epochs = get_epochs(history)
     train_acc = history["train_acc"]
@@ -43,7 +43,7 @@ def acc_curves(
     plt.plot(epochs, val_acc, label="val_acc")
     plt.xlabel("Epoch")
     plt.ylabel("Accuracy (%)")
-    plt.title(f"{model_name} Train / Validation Accuracy (%)")
+    plt.title(f"{exp_name} Train / Validation Accuracy (%)")
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
@@ -52,7 +52,7 @@ def acc_curves(
 
 def best_val_acc(
         history: History,
-        model_name: str
+        exp_name: str
 ) -> None:
     epochs = get_epochs(history)
     val_acc = history["val_acc"]
@@ -66,7 +66,7 @@ def best_val_acc(
     plt.scatter([best_epoch], [best_val])
     plt.xlabel("Epoch")
     plt.ylabel("Accuracy (%)")
-    plt.title(f"{model_name} Best Validation Accuracy (%)")
+    plt.title(f"{exp_name} Best Validation Accuracy (%)")
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
