@@ -19,6 +19,7 @@ Expand-Archive cassava-leaf-disease-classification.zip -DestinationPath data
 Hydra CLI override를 통해 다양한 모델 및 실험 설정으로 학습을 수행할 수 있습니다.
 ```bash
 python scripts/train.py -m model=resnet18,mobilenet_v2,simple_cnn
+python scripts/train.py model=resnet18 exp=freeze
 ```
 
 ## Output
@@ -43,7 +44,7 @@ runs/
 여러 모델(SimpleCNN, MobileNetV2, ResNet18)의 Validation 성능 곡선 비교도 가능합니다.  
 특정 실험(exp)의 결과를 시각화하려면 Hydra CLI override를 사용합니다.
 ```bash
-python scripts/visualize.py exp.name=resnet18_freeze 
+python scripts/visualize.py model=resnet18 exp=freeze 
 ```
 
 ## Hydra 기반 설정 관리

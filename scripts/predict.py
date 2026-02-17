@@ -12,15 +12,16 @@ from cassava_model_comparison.utils import make_batch_image_from_url
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(cfg: DictConfig):
     runs_dir = Path(cfg.paths.runs_dir)
+    run_dir = runs_dir / cfg.exp.name
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"predict device: {device}")
 
-    exp_name = cfg.exp.name
+    model_name = cfg.model.name
 
     model = load_best_model(
-        exp_name=exp_name,
-        best_path=runs_dir / "resnet18/best.pt",
+        model_name=model_name,
+        best_path=run_dir / "best.pt",
         num_classes=cfg.dataset.num_classes,
         device=device
     )

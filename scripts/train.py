@@ -18,10 +18,10 @@ def run_one_exp(
         device: torch.device
 ) -> None:
     runs_dir = Path(cfg.paths.runs_dir)
+    run_dir = runs_dir / cfg.exp.name
 
     exp_name = cfg.exp.name
 
-    run_dir = runs_dir / exp_name
     run_dir.mkdir(exist_ok=True, parents=True)
     OmegaConf.save(cfg, run_dir / "config.yaml")
 
@@ -38,7 +38,7 @@ def run_one_exp(
     train_loader, val_loader, _ = build_dataloaders(df=df, cfg=cfg)
 
     model = build_model(
-        model_name=exp_name,
+        model_name=cfg.model.name,
         num_classes=cfg.dataset.num_classes,
         pretrained=cfg.model.pretrained,
         freeze_backbone=cfg.model.freeze_backbone
